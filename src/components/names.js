@@ -76,7 +76,7 @@ export default function Names(props){
 
         <ScrollView>
             {namesSet.map((m => 
-                <Name Name={m}/>
+                <Name Name={m} id={m.id}/>
                 ))}
         </ScrollView>
         </>
