@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-creyes-staging-05704-authRole",
+      "UnauthRoleArn": "arn:aws:iam::518881093463:role/amplify-creyes-staging-05704-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::518881093463:role/amplify-creyes-staging-05704-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-creyes-staging-05704-deployment",
+      "UnauthRoleName": "amplify-creyes-staging-05704-unauthRole",
+      "StackName": "amplify-creyes-staging-05704",
+      "StackId": "arn:aws:cloudformation:us-east-2:518881093463:stack/amplify-creyes-staging-05704/0be11c00-7f0c-11ec-9c44-023abc9c34d4",
+      "AmplifyAppId": "ddew3clcpac1l"
+    },
+    "categories": {
+      "auth": {
+        "creyes": {}
+      }
+    }
+  }
+}

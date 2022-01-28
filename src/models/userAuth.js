@@ -1,0 +1,4 @@
+exports.LoginUser = {
+    username: "",
+    password: "",
+}
