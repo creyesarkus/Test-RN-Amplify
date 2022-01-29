@@ -79,3 +79,5 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+amplify/backend/api/creyes/cli-inputs.json
+amplify/backend/api/creyes/schema.graphql
