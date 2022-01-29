@@ -11,6 +11,7 @@ type NamesMetaData = {
 export declare class Names {
   readonly id: string;
   readonly name?: string;
+  readonly ownerId?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Names, NamesMetaData>);

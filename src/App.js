@@ -30,12 +30,15 @@ import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 import { withAuthenticator } from 'aws-amplify-react-native';
 
+import SignUp from './components/signup';
 import Login from './components/login';
 import Logout from './components/logout';
 import Names from './components/names';
 
 const App = () => {
   const [loged, isLoged] = React.useState(false);
+  const [signUp, isSignup] = React.useState(false);
+  const [userId, setId] = React.useState('');
 
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -54,14 +57,18 @@ const App = () => {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           
-          {!loged && (
-            <Login OnLoged={isLoged}/>
+          {(!loged && !signUp) && (
+            <Login OnLoged={isLoged} IsSignUp={isSignup} UserId={setId}/>
+          )}
+
+          {signUp && (
+            <SignUp OnSingUp={isSignup} />
           )}
 
           {loged && (
             <>
               <Logout LogedStatus={isLoged}/>
-              <Names />
+              <Names UserId={userId}/>
             </>
           )}
         </View>

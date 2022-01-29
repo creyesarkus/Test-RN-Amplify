@@ -2,9 +2,9 @@ import { DataStore } from '@aws-amplify/datastore';
 import { Names } from '../models';
 
 
-exports.FindAll = async() =>{
+exports.FindAll = async(ownerId) =>{
     try{
-        var result = await DataStore.query(Names);
+        var result = await DataStore.query(Names, c => c.ownerId('eq', ownerId));
     }catch(e){
         console.log('error loading names from DB: ', e);
         result = undefined;
@@ -21,7 +21,8 @@ exports.Create = async(data) => {
     try{
         var result = await DataStore.save(
                 new Names({
-                    "name": data
+                    "name": data.name,
+                    "ownerId": data.id,
                 })
             );
     }catch(e){

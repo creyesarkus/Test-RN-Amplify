@@ -1,4 +1,0 @@
-exports.LoginUser = {
-    username: "",
-    password: "",
-}

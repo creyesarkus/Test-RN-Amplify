@@ -8,7 +8,6 @@ import {
     Button,
 } from 'react-native';
 
-import { LoginUser } from '../models/userAuth';
 import { Auth } from 'aws-amplify';
 
 const styles = StyleSheet.create({
@@ -28,7 +27,11 @@ const styles = StyleSheet.create({
 
 export default function Login(props){
 
-    const [user, setUser] = React.useState(LoginUser);
+    const [user, setUser] = React.useState({
+        username: '',
+        password: '',
+    });
+
     const [boot, didBoot] = React.useState(false);
 
     React.useEffect(() => {
@@ -38,9 +41,7 @@ export default function Login(props){
 
         didBoot(true);
         
-        if(Auth.user != null){
-            props.OnLoged(true);
-        }
+        handleLoadSession();
     })
 
     const handleLogin = async() => {
@@ -61,12 +62,36 @@ export default function Login(props){
             return;
         }
 
+        props.UserId(result.username);
         props.OnLoged(true);
     };
 
     const handleInput = (txt, name) => {
         setUser({...user,[name]:txt});
     };
+
+    const handleSignUp = async() => {
+        props.IsSignUp(true);
+    }
+
+    const handleLoadSession = async() => {
+        console.log('Loading session');
+
+        try{
+            var result = await Auth.currentUserInfo();
+        }catch(e){
+            console.log('error loading session: ', e);
+            return;
+        }
+
+        if(result === null){
+            console.log('No user info to load');
+            return;
+        }
+
+        props.UserId(result.username);
+        props.OnLoged(true);
+    }
 
     return(
         <>
@@ -90,6 +115,10 @@ export default function Login(props){
                 <Button
                     title='Log In'
                     onPress={handleLogin} 
+                />
+                <Button
+                    title='Sign Up'
+                    onPress={handleSignUp} 
                 />
             </View>   
         </>

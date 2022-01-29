@@ -19,12 +19,24 @@ const css = StyleSheet.create({
 });
 export default function Names(props){
 
+    const [boot, didBoot] = React.useState(false);
     const [namesSet, newNamesSet] = React.useState([]);
-    const [newName, setNewName] = React.useState('');
+    const [newName, setNewName] = React.useState({
+        name: '',
+        id: props.UserId
+    });
+
+    React.useEffect(() =>{
+        if(boot){
+            return;
+        }
+        didBoot(true);
+        loadNames();
+    })
 
     const loadNames = async() => {
         try{
-            var result = await dsNames.FindAll();
+            var result = await dsNames.FindAll(props.UserId);
         }catch(e){
             console.log('error loading names from DB: ', e);
             result = undefined;
@@ -50,7 +62,7 @@ export default function Names(props){
             result = undefined;
         }
 
-        setNewName('');
+        setNewName({...newName, ['name']:''});
         
         loadNames();
     }
@@ -65,8 +77,8 @@ export default function Names(props){
         <View>
             <TextInput 
                 style={css.input}
-                value={newName}
-                onChangeText={setNewName}
+                value={newName.name}
+                onChangeText={txt => setNewName({...newName, ['name']: txt})}
             />
             <Button 
                 title='Create New Name'
